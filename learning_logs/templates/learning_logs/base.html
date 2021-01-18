@@ -1,75 +1,24 @@
-{% load bootstrap4 %}
-
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1,
-    shrink-to-fit=no">
-    
-  <title>Learning Log</title>
-
-  <!-- 新 Bootstrap4 核心 CSS 文件 -->
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
- 
-  <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
- 
-  <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
- 
-  <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<meta charset="UTF-8">
+<title>Learning Log</title>
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
-
-    <a class="navbar-brand" href="{% url 'learning_logs:index'%}">
-        Learning Log</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#navbarCollapse" aria-controls="navbarCollapse"
-        aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'learning_logs:topics'%}">
-              Topics</a></li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        {% if user.is_authenticated %}
-          <li class="nav-item">
-            <span class="navbar-text"}">Hello, {{ user.username }}.</span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
-          </li>
-        {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'users:register' %}">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'users:login' %}">Log in</a></li>
-        {% endif %}
-      </ul>
-    </div>
-
-  </nav>
-
-  <main role="main" class="container">
-    <div class="pb-2 mb-2 border-bottom">
-      {% block page_header %}{% endblock page_header %}
-    </div>
-    <div>
-      {% block content %}{% endblock content %}
-    </div>
-  </main>
-
+<p>
+	<a href="{% url 'learning_logs:index' %}">Learning Log</a> -
+	<a href="{% url 'learning_logs:topics' %}">Topics</a> -
+	{% if user.is_authenticated %}
+		Hello, {{ user.username }}. -
+		<a href="{% url 'users:logout' %}">Log out</a>
+	{% else %}
+		<a href="{% url 'users:register' %}">Register</a> -
+		<a href="{% url 'users:login' %}">Log in</a>
+	{% endif %}
+</p>
+{% block content %}{% endblock content %}
 </body>
 
 </html>
